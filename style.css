@@ -47,6 +47,22 @@ div.packwidget {
   padding: 1rem;
 }
 
+.viewer-only > div {
+  padding: 0;
+}
+
+.viewer-only .wrapper,
+.viewer-only #optimization-results,
+.viewer-only #error-log {
+  display: none;
+}
+
+.viewer-only #binViewer {
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
 .wrapper {
   overflow-y: auto;
   width: var(--panel-width);
