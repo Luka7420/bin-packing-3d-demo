@@ -518,10 +518,10 @@ PackWidget.prototype.create = function (container) {
     var itemOver = this.onItemOver;
     var itemOut = this.onItemOut;
 
+    var isTouchDevice = ("ontouchstart" in window) || (navigator.maxTouchPoints > 0);
+    var clickEventName = isTouchDevice ? 'mousedown' : 'click';
     for (var i = 0; i < graphicsItems.length; i++) {
-      domEvents.bind(graphicsItems[i], 'click', function(item) {
-          itemClicked(scene.userData.itemMap.get(item.target));}, false);
-      domEvents.bind(graphicsItems[i], 'touchstart', function(item) {
+      domEvents.bind(graphicsItems[i], clickEventName, function(item) {
           itemClicked(scene.userData.itemMap.get(item.target));}, false);
 
       domEvents.bind(graphicsItems[i], 'mouseover', function(item) {

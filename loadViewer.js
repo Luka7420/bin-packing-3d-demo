@@ -81,31 +81,45 @@ function createBinGraph(data, div) {
   var bins = mapBins([data.bin], binMapping());
   var packwidget = new PackWidget(bins, items, defaultOptions());
   var activeTouchItem = null;
-  packwidget.onItemOver = function (item) { if (item) { highlightItem(item, "#F00"); tooltip(mouse.x, mouse.y, item.dataItem.label, item); } };
+  var lastTapTime = 0;
+  var lastTapItem = null;
+  var doubleTapDelayMs = 300;
+  var formatTooltipText = function (item) {
+    if (!item || !item.dataItem) return "";
+    var label = item.dataItem.label || "";
+    var destination = item.dataItem.destination || "";
+    return destination ? (label + " \u2192 " + destination) : label;
+  };
+  var showTooltipForItem = function (item) {
+    highlightItem(item, "#F00");
+    tooltip(mouse.x, mouse.y, formatTooltipText(item), item);
+  };
+  var hideTooltipForItem = function (item) {
+    removeTooltip(item);
+    unhighlightItem(item);
+  };
+  packwidget.onItemOver = function (item) { if (item) { highlightItem(item, "#F00"); tooltip(mouse.x, mouse.y, formatTooltipText(item), item); } };
   packwidget.onItemOut = function (item) { if (item) { removeTooltip(item); unhighlightItem(item); } };
   if (isTouchDevice) {
     packwidget.onItemClick = function (item) {
-      if (!item) {
-        if (activeTouchItem) {
-          removeTooltip(activeTouchItem);
-          unhighlightItem(activeTouchItem);
-          activeTouchItem = null;
-        }
-        return;
-      }
+      if (!item) return;
+      var now = Date.now();
+      var isDoubleTap = (lastTapItem === item) && (now - lastTapTime <= doubleTapDelayMs);
+      lastTapTime = now;
+      lastTapItem = item;
+
+      if (!isDoubleTap) return;
+
       if (activeTouchItem && activeTouchItem !== item) {
-        removeTooltip(activeTouchItem);
-        unhighlightItem(activeTouchItem);
+        hideTooltipForItem(activeTouchItem);
       }
       if (activeTouchItem === item) {
-        removeTooltip(item);
-        unhighlightItem(item);
+        hideTooltipForItem(item);
         activeTouchItem = null;
         return;
       }
       activeTouchItem = item;
-      highlightItem(item, "#F00");
-      tooltip(mouse.x, mouse.y, item.dataItem.label, item);
+      showTooltipForItem(item);
     };
   }
   packwidget.create($("#pack").get(0));
