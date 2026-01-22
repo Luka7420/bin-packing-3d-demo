@@ -85,7 +85,6 @@ const DEMO_DATA = {
         itemsNotPacked: []
     }
 };
-// ⬆⬆⬆ STAVI SVOJ API KEY OVDE ⬆⬆⬆
 
 const APIEndpoints = {
     // Sync endpoint – odmah vraća rezultat (nema async ID + status koraka)

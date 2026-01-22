@@ -10,11 +10,13 @@
   </head>
   
   <body>
+    <!-- Main application viewport (layout wrapper for controls, viewer, results) -->
     <div class="viewport viewer-only">
         <div class="wrapper">
             <h1>Loading Space Optimization</h1>
             <a href="https://www.ptvlogistics.com/">by PTV Logistics</a>            
             
+            <!-- Bin input section (container dimensions and capacity) -->
             <div class="entry-settings">
                 <h4>Bin</h4>
                 <h6>[Default is a 40 Ft. container]</h6>
@@ -47,6 +49,7 @@
                 </table>
             </div>
 
+            <!-- Item input section (item dimensions, weight, and count) -->
             <div class="entry-settings">
                 <h4>Item</h4>
                 <h6>[Default is 10 EUR-pallet of 1m<sup>3</sup>] and 500kg</h6>
@@ -79,6 +82,7 @@
                 </table>
             </div>
 
+            <!-- Optimization focus selector -->
             <div class="entry-settings">
                 <h4>Focus</h4>
                 <select id="focus">
@@ -87,11 +91,13 @@
                 </select>
             </div>
 
+            <!-- Primary actions -->
             <div class="group space-between">
               <button id="btn-start-optimization" disabled>Optimize your items</button>
               <button id="clear-data">Clear all data</button>
             </div>
 
+            <!-- In-progress state indicator -->
             <div id="processing-indicator">
               <div class="loader"></div>
               <span>
@@ -101,8 +107,10 @@
             </div>
         </div>
 
+        <!-- 3D bin viewer mount point -->
         <div id="binViewer"></div>
 
+        <!-- Optimization output panel (bin switcher + KPIs) -->
         <div id="optimization-results">
           <div>
             <div id="bin-switcher" class="group">
@@ -133,6 +141,7 @@
         </div>
     </div>
 
+    <!-- API error display -->
     <div id="error-log">
       Oh no... something has gone wrong.<br />
       The API returned the following:

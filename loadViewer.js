@@ -88,7 +88,7 @@ function createBinGraph(data, div) {
     if (!item || !item.dataItem) return "";
     var label = item.dataItem.label || "";
     var destination = item.dataItem.destination || "";
-    var header = destination ? (label + " \u2192 " + destination) : label;
+    var header = destination ? ("Naziv: " + label) : label;
     var client = destination ? ("Klijent: " + destination) : "";
     var coords = "Pozicija: " + item.z + "," + item.x + "," + item.y;
     var lines = [];
