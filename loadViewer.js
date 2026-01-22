@@ -88,7 +88,10 @@ function createBinGraph(data, div) {
     if (!item || !item.dataItem) return "";
     var label = item.dataItem.label || "";
     var destination = item.dataItem.destination || "";
-    return destination ? (label + " \u2192 " + destination) : label;
+    var header = destination ? (label + " \u2192 " + destination) : label;
+    var coords = "coords: " + item.z + "," + item.x + "," + item.y;
+    if (header) return header + "<br>" + coords;
+    return coords;
   };
   var showTooltipForItem = function (item) {
     highlightItem(item, "#F00");

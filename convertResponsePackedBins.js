@@ -46,14 +46,19 @@ function convertToViewer(request, response) {
                     let items = [];
                     for (let i of b.packedItems) {
                         let item = {};
+                        const itemIndex = searchItemIndex(request, i.itemId);
+                        const requestItem = request.items[itemIndex];
                         item.label = i.itemId;
-                        item.nr = searchItemIndex(request, i.itemId);
+                        item.nr = itemIndex;
                         item.x = i.position.x;
                         item.y = i.position.y;
                         item.z = i.position.z;
                         item.width = i.dimensions.x;
                         item.height = i.dimensions.y;
                         item.depth = i.dimensions.z;
+                        if (requestItem && requestItem.destination) {
+                            item.destination = requestItem.destination;
+                        }
                         items.push(item);
                     }
                     instance.items = items;
