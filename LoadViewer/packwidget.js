@@ -521,6 +521,8 @@ PackWidget.prototype.create = function (container) {
     for (var i = 0; i < graphicsItems.length; i++) {
       domEvents.bind(graphicsItems[i], 'click', function(item) {
           itemClicked(scene.userData.itemMap.get(item.target));}, false);
+      domEvents.bind(graphicsItems[i], 'touchstart', function(item) {
+          itemClicked(scene.userData.itemMap.get(item.target));}, false);
 
       domEvents.bind(graphicsItems[i], 'mouseover', function(item) {
           itemOver(scene.userData.itemMap.get(item.target));}, false);

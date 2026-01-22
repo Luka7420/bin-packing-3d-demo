@@ -1,0 +1,3 @@
+/*
+  X-Frame-Options: ALLOW-FROM https://go.glideapps.com/
+  Content-Security-Policy: frame-ancestors *;
