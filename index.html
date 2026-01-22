@@ -16,7 +16,7 @@
             <h1>Loading Space Optimization</h1>
             <a href="https://www.ptvlogistics.com/">by PTV Logistics</a>            
             
-            <!-- Bin input section (container dimensions and capacity) -->
+            <!-- Bin input section (container dimensions and capacity) NOT DISPLAYED -->
             <div class="entry-settings">
                 <h4>Bin</h4>
                 <h6>[Default is a 40 Ft. container]</h6>
@@ -49,7 +49,7 @@
                 </table>
             </div>
 
-            <!-- Item input section (item dimensions, weight, and count) -->
+            <!-- Item input section (item dimensions, weight, and count) NOT DISPLAYED --> 
             <div class="entry-settings">
                 <h4>Item</h4>
                 <h6>[Default is 10 EUR-pallet of 1m<sup>3</sup>] and 500kg</h6>
@@ -82,7 +82,7 @@
                 </table>
             </div>
 
-            <!-- Optimization focus selector -->
+            <!-- Optimization focus selector NOT DISPLAYED -->
             <div class="entry-settings">
                 <h4>Focus</h4>
                 <select id="focus">
@@ -91,7 +91,7 @@
                 </select>
             </div>
 
-            <!-- Primary actions -->
+            <!-- Primary actions NOT DISPLAYED -->
             <div class="group space-between">
               <button id="btn-start-optimization" disabled>Optimize your items</button>
               <button id="clear-data">Clear all data</button>
@@ -101,8 +101,7 @@
             <div id="processing-indicator">
               <div class="loader"></div>
               <span>
-                The optimization is in progress.<br />
-                This may take a while.
+                Sistem vrši optimizaciju pakovanja, molimo sačekajte...
               </span>
             </div>
         </div>
@@ -121,29 +120,29 @@
               </div>              
               <button id="next-bin">&gt;</button>
             </div>
-            <div class="key-value"><span>Number of items</span><span id="total-items-count">-</span></div>
-            <div class="key-value"><span>Travel items volume</span><span id="total-items-volume">-</span></div>
-            <div class="key-value"><span>Travel items weight</span><span id="total-items-weight">-</span></div>
-            <div class="key-value"><span>Used weight capacity</span><span id="used-weight-capacity">-</span></div>
-            <div class="key-value"><span>Used volume capacity</span><span id="used-volume-capacity">-</span></div>
-            <div class="key-value"><span>Loading meters</span><span id="loading-meters">-</span></div>
+            <div class="key-value"><span>Broj robnih artikala</span><span id="total-items-count">-</span></div>
+            <div class="key-value"><span>Ukupna zapremina robe</span><span id="total-items-volume">-</span></div>
+            <div class="key-value"><span>Ukupna težina robe</span><span id="total-items-weight">-</span></div>
+            <div class="key-value"><span>Iskorišćen težinski kapacitet kamiona</span><span id="used-weight-capacity">-</span></div>
+            <div class="key-value"><span>Iskorišćena zapremina kamiona</span><span id="used-volume-capacity">-</span></div>
+            <div class="key-value"><span>Ukupna dužina pakovanja robe</span><span id="loading-meters">-</span></div>
           </div>
 
           <div id="kpis">
-            <h3>Optimization results</h3>
-            <h5>Bins</h5>
-            <div class="key-value"><span>Used</span><span id="used-bins">-</span></div>
-            <div class="key-value"><span>Unused</span><span id="unused-bins">-</span></div>
-            <h5>Items</h5>
-            <div class="key-value"><span>Packed</span><span id="packed-items">-</span></div>
-            <div class="key-value"><span>Unpacked</span><span id="unpacked-items">-</span></div>
+            <h3>Rezultat optimizacije pakovanja</h3>
+            <h5>Kamioni</h5>
+            <div class="key-value"><span>Iskoricenih</span><span id="used-bins">-</span></div>
+            <div class="key-value"><span>Neiskoricenih</span><span id="unused-bins">-</span></div>
+            <h5>Roba</h5>
+            <div class="key-value"><span>Upakovana</span><span id="packed-items">-</span></div>
+            <div class="key-value"><span>Neupakovana</span><span id="unpacked-items">-</span></div>
           </div>
         </div>
     </div>
 
     <!-- API error display -->
     <div id="error-log">
-      Oh no... something has gone wrong.<br />
+      Doslo je do greske...<br />
       The API returned the following:
       <pre id="error-details"></pre>
       <button id="close-error-details">Close</button>

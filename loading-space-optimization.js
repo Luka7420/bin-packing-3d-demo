@@ -13,7 +13,7 @@ const DEMO_DATA = {
     request: {
         bins: [
             {
-                id: "B#0",
+                id: "Kamion#0",
                 numberOfInstances: 1,
                 dimensions: { x: 240, y: 244, z: 1360 },
                 maximumWeightCapacity: 20000 * 1000
@@ -21,28 +21,28 @@ const DEMO_DATA = {
         ],
         items: [
             {
-                id: "I#0",
+                id: "Artikal#0",
                 numberOfInstances: 6,
                 dimensions: { x: 80, y: 104, z: 120 },
                 weight: 500 * 1000,
                 destination: "Klijent A"
             },
             {
-                id: "I#1",
+                id: "Artikal#1",
                 numberOfInstances: 4,
                 dimensions: { x: 120, y: 80, z: 60 },
                 weight: 250 * 1000,
                 destination: "Klijent B"
             },
             {
-                id: "I#2",
+                id: "Artikal#2",
                 numberOfInstances: 8,
                 dimensions: { x: 60, y: 60, z: 100 },
                 weight: 120 * 1000,
                 destination: "Klijent C"
             },
             {
-                id: "I#3",
+                id: "Artikal#3",
                 numberOfInstances: 1,
                 dimensions: { x: 200, y: 120, z: 150 },
                 weight: 800 * 1000,
@@ -53,27 +53,27 @@ const DEMO_DATA = {
     response: {
         packedBins: [
             {
-                binId: "B#0",
+                binId: "Kamion#0",
                 packedItems: [
-                    { itemId: "I#0", dimensions: { x: 80, y: 104, z: 120 }, position: { x: 0, y: 0, z: 0 } },
-                    { itemId: "I#0", dimensions: { x: 80, y: 104, z: 120 }, position: { x: 80, y: 0, z: 0 } },
-                    { itemId: "I#0", dimensions: { x: 80, y: 104, z: 120 }, position: { x: 160, y: 0, z: 0 } },
-                    { itemId: "I#0", dimensions: { x: 80, y: 104, z: 120 }, position: { x: 0, y: 104, z: 0 } },
-                    { itemId: "I#0", dimensions: { x: 80, y: 104, z: 120 }, position: { x: 80, y: 104, z: 0 } },
-                    { itemId: "I#0", dimensions: { x: 80, y: 104, z: 120 }, position: { x: 160, y: 104, z: 0 } },
-                    { itemId: "I#1", dimensions: { x: 120, y: 80, z: 60 }, position: { x: 0, y: 0, z: 120 } },
-                    { itemId: "I#1", dimensions: { x: 120, y: 80, z: 60 }, position: { x: 120, y: 0, z: 120 } },
-                    { itemId: "I#1", dimensions: { x: 120, y: 80, z: 60 }, position: { x: 0, y: 80, z: 120 } },
-                    { itemId: "I#1", dimensions: { x: 120, y: 80, z: 60 }, position: { x: 120, y: 80, z: 120 } },
-                    { itemId: "I#2", dimensions: { x: 60, y: 60, z: 100 }, position: { x: 0, y: 0, z: 180 } },
-                    { itemId: "I#2", dimensions: { x: 60, y: 60, z: 100 }, position: { x: 60, y: 0, z: 180 } },
-                    { itemId: "I#2", dimensions: { x: 60, y: 60, z: 100 }, position: { x: 120, y: 0, z: 180 } },
-                    { itemId: "I#2", dimensions: { x: 60, y: 60, z: 100 }, position: { x: 180, y: 0, z: 180 } },
-                    { itemId: "I#2", dimensions: { x: 60, y: 60, z: 100 }, position: { x: 0, y: 60, z: 180 } },
-                    { itemId: "I#2", dimensions: { x: 60, y: 60, z: 100 }, position: { x: 60, y: 60, z: 180 } },
-                    { itemId: "I#2", dimensions: { x: 60, y: 60, z: 100 }, position: { x: 120, y: 60, z: 180 } },
-                    { itemId: "I#2", dimensions: { x: 60, y: 60, z: 100 }, position: { x: 180, y: 60, z: 180 } },
-                    { itemId: "I#3", dimensions: { x: 200, y: 120, z: 150 }, position: { x: 0, y: 0, z: 280 } }
+                    { itemId: "Artikal#0", dimensions: { x: 80, y: 104, z: 120 }, position: { x: 0, y: 0, z: 0 } },
+                    { itemId: "Artikal#0", dimensions: { x: 80, y: 104, z: 120 }, position: { x: 80, y: 0, z: 0 } },
+                    { itemId: "Artikal#0", dimensions: { x: 80, y: 104, z: 120 }, position: { x: 160, y: 0, z: 0 } },
+                    { itemId: "Artikal#0", dimensions: { x: 80, y: 104, z: 120 }, position: { x: 0, y: 104, z: 0 } },
+                    { itemId: "Artikal#0", dimensions: { x: 80, y: 104, z: 120 }, position: { x: 80, y: 104, z: 0 } },
+                    { itemId: "Artikal#0", dimensions: { x: 80, y: 104, z: 120 }, position: { x: 160, y: 104, z: 0 } },
+                    { itemId: "Artikal#1", dimensions: { x: 120, y: 80, z: 60 }, position: { x: 0, y: 0, z: 120 } },
+                    { itemId: "Artikal#1", dimensions: { x: 120, y: 80, z: 60 }, position: { x: 120, y: 0, z: 120 } },
+                    { itemId: "Artikal#1", dimensions: { x: 120, y: 80, z: 60 }, position: { x: 0, y: 80, z: 120 } },
+                    { itemId: "Artikal#1", dimensions: { x: 120, y: 80, z: 60 }, position: { x: 120, y: 80, z: 120 } },
+                    { itemId: "Artikal#2", dimensions: { x: 60, y: 60, z: 100 }, position: { x: 0, y: 0, z: 180 } },
+                    { itemId: "Artikal#2", dimensions: { x: 60, y: 60, z: 100 }, position: { x: 60, y: 0, z: 180 } },
+                    { itemId: "Artikal#2", dimensions: { x: 60, y: 60, z: 100 }, position: { x: 120, y: 0, z: 180 } },
+                    { itemId: "Artikal#2", dimensions: { x: 60, y: 60, z: 100 }, position: { x: 180, y: 0, z: 180 } },
+                    { itemId: "Artikal#2", dimensions: { x: 60, y: 60, z: 100 }, position: { x: 0, y: 60, z: 180 } },
+                    { itemId: "Artikal#2", dimensions: { x: 60, y: 60, z: 100 }, position: { x: 60, y: 60, z: 180 } },
+                    { itemId: "Artikal#2", dimensions: { x: 60, y: 60, z: 100 }, position: { x: 120, y: 60, z: 180 } },
+                    { itemId: "Artikal#2", dimensions: { x: 60, y: 60, z: 100 }, position: { x: 180, y: 60, z: 180 } },
+                    { itemId: "Artikal#3", dimensions: { x: 200, y: 120, z: 150 }, position: { x: 0, y: 0, z: 280 } }
                 ],
                 totalItemsVolume: 14774400,
                 totalItemsWeight: 5760000,
