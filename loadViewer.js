@@ -89,9 +89,13 @@ function createBinGraph(data, div) {
     var label = item.dataItem.label || "";
     var destination = item.dataItem.destination || "";
     var header = destination ? (label + " \u2192 " + destination) : label;
+    var client = destination ? ("Klijent: " + destination) : "";
     var coords = "Pozicija: " + item.z + "," + item.x + "," + item.y;
-    if (header) return header + "<br>" + coords;
-    return coords;
+    var lines = [];
+    if (header) lines.push(header);
+    if (client) lines.push(client);
+    lines.push(coords);
+    return lines.join("<br>");
   };
   var showTooltipForItem = function (item) {
     highlightItem(item, "#F00");
