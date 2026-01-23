@@ -88,12 +88,15 @@ function createBinGraph(data, div) {
     if (!item || !item.dataItem) return "";
     var label = item.dataItem.label || "";
     var destination = item.dataItem.destination || "";
+    var weight = item.dataItem.weight;
     var header = destination ? ("Naziv: " + label) : label;
     var client = destination ? ("Klijent: " + destination) : "";
     var coords = "Pozicija: " + item.z + "," + item.x + "," + item.y;
+    var weightLine = (weight != null && !isNaN(weight)) ? ("Težina: " + (weight / 1000) + " kg") : "";
     var lines = [];
     if (header) lines.push(header);
     if (client) lines.push(client);
+    if (weightLine) lines.push(weightLine);
     lines.push(coords);
     return lines.join("<br>");
   };

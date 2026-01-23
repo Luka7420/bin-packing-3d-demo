@@ -56,6 +56,9 @@ function convertToViewer(request, response) {
                         item.width = i.dimensions.x;
                         item.height = i.dimensions.y;
                         item.depth = i.dimensions.z;
+                        if (requestItem && requestItem.weight != null) {
+                            item.weight = requestItem.weight;
+                        }
                         if (requestItem && requestItem.destination) {
                             item.destination = requestItem.destination;
                         }
