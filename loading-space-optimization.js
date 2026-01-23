@@ -7,9 +7,10 @@
 const api_key = "RVVfZmQxMjY5NjIzZTViNDQ2MzhiYjE4M2M5YjFmMGVmMmQ6OTA5ZTMwZWItYWYzNC00OWZhLTkzMGQtNzZlMWEyNGRiNTA5";
 
 // Demo mode: bypass API calls and use hardcoded data for offline demos.
-const USE_LOAD_PLAN_API = false;
-const DEMO_MODE = true;
+const USE_LOAD_PLAN_API = true;
+const DEMO_MODE = false;
 
+// Load plan API configuration (Change LOAD_PLAN_ENDPOINT and LOAD_PLAN_REQUEST_BODY as needed)
 const LOAD_PLAN_ENDPOINT = "http://localhost/load-plan.php";
 const LOAD_PLAN_REQUEST_BODY = {
     load_plan_id: "LP-TEST"
@@ -221,6 +222,9 @@ const mapLoadPlanToOptimization = (loadPlan) => {
         return sum + (item.weight_kg || 0) * 1000;
     }, 0);
 
+    const totalItemsLoaded = (loadPlan.summary && loadPlan.summary.total_items_loaded) || placedItems.length;
+    const totalItemsUnloaded = (loadPlan.summary && loadPlan.summary.total_items_unloaded) || unplannedItems.length;
+
     const response = {
         packedBins: [
             {
@@ -242,7 +246,9 @@ const mapLoadPlanToOptimization = (loadPlan) => {
             numberOfInstances: 1,
             weight: (item.weight_kg || 0) * 1000,
             dimensions: mapDimensionsFromPlan(item.dimensions_cm || {})
-        }))
+        })),
+        totalItemsLoaded,
+        totalItemsUnloaded
     };
 
     return { request, response };
@@ -468,9 +474,16 @@ const populateKPIs = () => {
 
     getElement("used-bins").innerText = totalUsedBins;
     getElement("unused-bins").innerText = totalAvailableBins - totalUsedBins;
-    getElement("packed-items").innerText =
-        totalAvailableItems - totalUnpackedItems;
-    getElement("unpacked-items").innerText = totalUnpackedItems;
+    if (response.totalItemsLoaded != null || response.totalItemsUnloaded != null) {
+        getElement("packed-items").innerText =
+            response.totalItemsLoaded != null ? response.totalItemsLoaded : "-";
+        getElement("unpacked-items").innerText =
+            response.totalItemsUnloaded != null ? response.totalItemsUnloaded : "-";
+    } else {
+        getElement("packed-items").innerText =
+            totalAvailableItems - totalUnpackedItems;
+        getElement("unpacked-items").innerText = totalUnpackedItems;
+    }
 };
 
 const logError = async (response) => {
