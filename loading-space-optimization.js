@@ -7,7 +7,13 @@
 const api_key = "RVVfZmQxMjY5NjIzZTViNDQ2MzhiYjE4M2M5YjFmMGVmMmQ6OTA5ZTMwZWItYWYzNC00OWZhLTkzMGQtNzZlMWEyNGRiNTA5";
 
 // Demo mode: bypass API calls and use hardcoded data for offline demos.
+const USE_LOAD_PLAN_API = false;
 const DEMO_MODE = true;
+
+const LOAD_PLAN_ENDPOINT = "http://localhost/load-plan.php";
+const LOAD_PLAN_REQUEST_BODY = {
+    load_plan_id: "LP-TEST"
+};
 
 const DEMO_DATA = {
     request: {
@@ -129,9 +135,11 @@ const initializeApplication = () => {
         e.preventDefault();
         e.returnValue = "";
     });
-
+    // switch izmedju demo i normalnog moda
     if (DEMO_MODE) {
         loadDemoData();
+        optimize();
+    } else if (USE_LOAD_PLAN_API) {
         optimize();
     }
 };
@@ -155,9 +163,116 @@ const startOptimization = (focus, requestBody) =>
         })
     ).then(response => response.ok ? response.json() : logError(response));
 
+const fetchLoadPlan = () =>
+    fetch(
+        LOAD_PLAN_ENDPOINT,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(LOAD_PLAN_REQUEST_BODY)
+        }
+    ).then(response => response.ok ? response.json() : logError(response));
+
+const mapDimensionsFromPlan = (dims) => ({
+    x: dims.width,
+    y: dims.height,
+    z: dims.length
+});
+
+const mapPositionFromPlan = (pos) => ({
+    x: pos.y,
+    y: pos.z,
+    z: pos.x
+});
+
+const mapLoadPlanToOptimization = (loadPlan) => {
+    const container = loadPlan.container || {};
+    const containerDims = container.dimensions_cm || {};
+    const placedItems = loadPlan.placed_items || [];
+    const unplannedItems = loadPlan.unplanned_items || [];
+    const utilization = (loadPlan.summary && loadPlan.summary.utilization) || {};
+
+    const binId = container.type || "B#0";
+    const request = {
+        bins: [
+            {
+                id: binId,
+                numberOfInstances: 1,
+                dimensions: mapDimensionsFromPlan(containerDims),
+                maximumWeightCapacity: (container.max_weight_kg || 0) * 1000
+            }
+        ],
+        items: placedItems.map((item) => ({
+            id: item.item_id,
+            numberOfInstances: 1,
+            dimensions: mapDimensionsFromPlan(item.dimensions_cm || {}),
+            weight: (item.weight_kg || 0) * 1000,
+            destination: item.client_name || ""
+        }))
+    };
+
+    const totalItemsVolume = placedItems.reduce((sum, item) => {
+        const dims = item.dimensions_cm || {};
+        return sum + (dims.length || 0) * (dims.width || 0) * (dims.height || 0);
+    }, 0);
+    const totalItemsWeight = placedItems.reduce((sum, item) => {
+        return sum + (item.weight_kg || 0) * 1000;
+    }, 0);
+
+    const response = {
+        packedBins: [
+            {
+                binId,
+                packedItems: placedItems.map((item) => ({
+                    itemId: item.item_id,
+                    dimensions: mapDimensionsFromPlan(item.dimensions_cm || {}),
+                    position: mapPositionFromPlan(item.position_cm || {})
+                })),
+                totalItemsVolume,
+                totalItemsWeight,
+                usedWeightCapacity: utilization.weight_percentage || 0,
+                usedVolumeCapacity: utilization.volume_percentage || 0,
+                loadingMeters: utilization.linear_meters_occupied || 0
+            }
+        ],
+        itemsNotPacked: unplannedItems.map((item) => ({
+            itemId: item.item_id,
+            numberOfInstances: 1,
+            weight: (item.weight_kg || 0) * 1000,
+            dimensions: mapDimensionsFromPlan(item.dimensions_cm || {})
+        }))
+    };
+
+    return { request, response };
+};
+
 // ✅ Sync optimize – nema polling-a, nema /status/{id}, nema /bins/{id}
 const optimize = async () => {
     showElement("processing-indicator", "flex");
+
+    if (USE_LOAD_PLAN_API) {
+        const loadPlan = await fetchLoadPlan();
+        if (!loadPlan) {
+            return;
+        }
+        const mapped = mapLoadPlanToOptimization(loadPlan);
+        appState.optimizedResult.request = mapped.request;
+        appState.optimizedResult.response = mapped.response;
+
+        handleResponse(
+            $("#binViewer"),
+            appState.optimizedResult.request,
+            appState.optimizedResult.response
+        );
+
+        populateBinDetails();
+        populateKPIs();
+        showElement("optimization-results", "flex");
+        hideElement("processing-indicator");
+        return;
+    }
 
     const requestBody = DEMO_MODE ? DEMO_DATA.request : createRequest();
 
