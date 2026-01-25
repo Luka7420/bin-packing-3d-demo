@@ -11,8 +11,7 @@ const USE_LOAD_PLAN_API = true;
 const DEMO_MODE = false;
 
 // Load plan API configuration (Change LOAD_PLAN_ENDPOINT and LOAD_PLAN_REQUEST_BODY as needed)
-const LOAD_PLAN_ENDPOINT = "http://l8wo40ss80kcwc44kkgo40ss.165.22.29.201.sslip.io";
-//const LOAD_PLAN_ENDPOINT = "http://localhost/load-plan.php";
+const LOAD_PLAN_ENDPOINT = "/load-plan.php";
 const LOAD_PLAN_REQUEST_BODY = {
     load_plan_id: "LP-TEST"
 };

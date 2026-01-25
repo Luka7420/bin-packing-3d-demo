@@ -1,8 +1,7 @@
-FROM nginx:1.27-alpine
+FROM php:8.2-apache
 
-# Serve static visualizer files
-WORKDIR /usr/share/nginx/html
+# Serve static files and PHP from the web root
+WORKDIR /var/www/html
 COPY . .
 
-# Use default nginx config; expose HTTP
 EXPOSE 80
