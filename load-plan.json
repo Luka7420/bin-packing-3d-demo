@@ -1,0 +1,95 @@
+{
+  "load_plan_id": "LP-2026-01-25-007",
+  "summary": {
+    "total_items_loaded": 7,
+    "total_items_unloaded": 0,
+    "utilization": {
+      "volume_percentage": 14.8,
+      "weight_percentage": 18.3,
+      "linear_meters_occupied": 4.9
+    }
+  },
+  "container": {
+    "type": "40HC",
+    "max_weight_kg": 28500,
+    "max_volume_m3": 76.2,
+    "dimensions_cm": {
+      "length": 1202,
+      "width": 235,
+      "height": 270
+    }
+  },
+  "placed_items": [
+    {
+      "item_id": "PALLET-A1",
+      "client_name": "IKEA Serbia",
+      "description": "Furniture Components",
+      "weight_kg": 450,
+      "position_cm": { "x": 0, "y": 0, "z": 0 },
+      "dimensions_cm": { "length": 120, "width": 80, "height": 220 },
+      "rotation": { "is_rotated": false },
+      "load_order": 1
+    },
+    {
+      "item_id": "BOX-B2",
+      "client_name": "Hemofarm Vrsac",
+      "description": "Medical Supplies",
+      "weight_kg": 30,
+      "position_cm": { "x": 120, "y": 0, "z": 0 },
+      "dimensions_cm": { "length": 60, "width": 40, "height": 50 },
+      "rotation": { "is_rotated": true },
+      "load_order": 2
+    },
+    {
+      "item_id": "PALLET-C3",
+      "client_name": "Bambi Pozarevac",
+      "description": "Biscuits (Plazma)",
+      "weight_kg": 320,
+      "position_cm": { "x": 180, "y": 0, "z": 0 },
+      "dimensions_cm": { "length": 120, "width": 80, "height": 150 },
+      "rotation": { "is_rotated": false },
+      "load_order": 3
+    },
+    {
+      "item_id": "PALLET-D4",
+      "client_name": "Nectar Backa Palanka",
+      "description": "Fruit Juice",
+      "weight_kg": 260,
+      "position_cm": { "x": 180, "y": 0, "z": 150 },
+      "dimensions_cm": { "length": 120, "width": 80, "height": 110 },
+      "rotation": { "is_rotated": false },
+      "load_order": 4
+    },
+    {
+      "item_id": "APP-E5",
+      "client_name": "Gorenje Valjevo",
+      "description": "Mini Fridge Unit",
+      "weight_kg": 180,
+      "position_cm": { "x": 300, "y": 0, "z": 0 },
+      "dimensions_cm": { "length": 70, "width": 70, "height": 180 },
+      "rotation": { "is_rotated": true },
+      "load_order": 5
+    },
+    {
+      "item_id": "BOX-F6",
+      "client_name": "Imlek Beograd",
+      "description": "Dairy Products",
+      "weight_kg": 90,
+      "position_cm": { "x": 370, "y": 0, "z": 0 },
+      "dimensions_cm": { "length": 80, "width": 60, "height": 70 },
+      "rotation": { "is_rotated": false },
+      "load_order": 6
+    },
+    {
+      "item_id": "CRATE-G7",
+      "client_name": "Frikom Beograd",
+      "description": "Frozen Goods",
+      "weight_kg": 140,
+      "position_cm": { "x": 450, "y": 0, "z": 0 },
+      "dimensions_cm": { "length": 100, "width": 80, "height": 90 },
+      "rotation": { "is_rotated": false },
+      "load_order": 7
+    }
+  ],
+  "unplanned_items": []
+}

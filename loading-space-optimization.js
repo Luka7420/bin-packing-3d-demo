@@ -11,7 +11,7 @@ const USE_LOAD_PLAN_API = true;
 const DEMO_MODE = false;
 
 // Load plan API configuration (Change LOAD_PLAN_ENDPOINT and LOAD_PLAN_REQUEST_BODY as needed)
-const LOAD_PLAN_ENDPOINT = "/load-plan.php";
+const LOAD_PLAN_ENDPOINT = "/load-plan.json";
 const LOAD_PLAN_REQUEST_BODY = {
     load_plan_id: "LP-TEST"
 };
@@ -168,13 +168,13 @@ const fetchLoadPlan = () =>
     fetch(
         LOAD_PLAN_ENDPOINT,
         {
-            method: "POST",
+            method: "GET",
             headers: {
                 "Content-Type": "application/json"
-            },
-            body: JSON.stringify(LOAD_PLAN_REQUEST_BODY)
+            }
         }
-    ).then(response => response.ok ? response.json() : logError(response));
+    ).then(response => response.ok ? response.json() : logError(response))
+        .then((data) => (data && data.record) ? data.record : data);
 
 const mapDimensionsFromPlan = (dims) => ({
     x: dims.width,
