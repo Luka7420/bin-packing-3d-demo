@@ -62,6 +62,9 @@ function convertToViewer(request, response) {
                         if (requestItem && requestItem.destination) {
                             item.destination = requestItem.destination;
                         }
+                        if (requestItem && requestItem.unloadOrder != null) {
+                            item.unloadOrder = requestItem.unloadOrder;
+                        }
                         items.push(item);
                     }
                     instance.items = items;

@@ -89,15 +89,18 @@ function createBinGraph(data, div) {
     var label = item.dataItem.label || "";
     var destination = item.dataItem.destination || "";
     var weight = item.dataItem.weight;
+    var unloadOrder = item.dataItem.unloadOrder;
     var header = destination ? ("Naziv: " + label) : label;
     var client = destination ? ("Klijent: " + destination) : "";
     var coords = "Pozicija: " + item.z + "," + item.x + "," + item.y;
     var weightLine = (weight != null && !isNaN(weight)) ? ("Težina: " + (weight / 1000) + " kg") : "";
+    var unloadOrderLine = (unloadOrder != null && !isNaN(unloadOrder)) ? ("Redosled istovara: " + unloadOrder) : "";
     var lines = [];
     if (header) lines.push(header);
     if (client) lines.push(client);
     if (weightLine) lines.push(weightLine);
     lines.push(coords);
+    if (unloadOrderLine) lines.push(unloadOrderLine);
     return lines.join("<br>");
   };
   var showTooltipForItem = function (item) {

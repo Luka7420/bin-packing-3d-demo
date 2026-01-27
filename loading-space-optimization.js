@@ -11,7 +11,7 @@ const USE_LOAD_PLAN_API = true;
 const DEMO_MODE = false;
 
 // Load plan API configuration (Change LOAD_PLAN_ENDPOINT and LOAD_PLAN_REQUEST_BODY as needed)
-const LOAD_PLAN_ENDPOINT = "/load-plan.json";
+const LOAD_PLAN_ENDPOINT = "https://api.jsonbin.io/v3/qs/697885f043b1c97be94e087a";
 const LOAD_PLAN_REQUEST_BODY = {
     load_plan_id: "LP-TEST"
 };
@@ -210,7 +210,8 @@ const mapLoadPlanToOptimization = (loadPlan) => {
             numberOfInstances: 1,
             dimensions: mapDimensionsFromPlan(item.dimensions_cm || {}),
             weight: (item.weight_kg || 0) * 1000,
-            destination: item.client_name || ""
+            destination: item.client_name || "",
+            unloadOrder: (item.unload_order != null) ? item.unload_order : item.load_order
         }))
     };
 
